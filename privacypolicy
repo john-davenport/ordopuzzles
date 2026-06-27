@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Ordo Puzzles</title>
+<meta name="description" content="The Ordo privacy policy, in plain English. Ordo keeps your puzzle data on your device and collects no personal information.">
+<meta name="robots" content="index">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F4EEE2'/%3E%3Crect x='6' y='6' width='9' height='9' rx='2' fill='%23BC6B4F'/%3E%3Crect x='17' y='6' width='9' height='9' rx='2' fill='%23C9A646'/%3E%3Crect x='6' y='17' width='9' height='9' rx='2' fill='%237E8C6A'/%3E%3Crect x='17' y='17' width='9' height='9' rx='2' fill='%235F727B'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#F4EEE2;
+    --paper-edge:#EDE5D5;
+    --ink:#33302A;
+    --ink-soft:#6E665A;
+    --accent:#3E5C54;
+    --rule:rgba(51,48,42,.14);
+    --serif:"Fraunces", Georgia, "Times New Roman", serif;
+    --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    line-height:1.65;
+  }
+
+  .wrap{max-width:660px;margin:0 auto;padding:0 24px}
+
+  header{
+    border-bottom:1px solid var(--rule);
+    padding:22px 0;
+    margin-bottom:46px;
+  }
+  header .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+  .home{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:1.5rem;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .home small{
+    font-family:var(--sans);
+    font-size:.62rem;
+    font-weight:600;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-left:.7em;
+  }
+  .home:hover{color:var(--accent)}
+  .back{
+    font-size:.82rem;
+    color:var(--ink-soft);
+    text-decoration:none;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:1px;
+  }
+  .back:hover,.back:focus-visible{color:var(--accent);border-color:var(--accent)}
+
+  h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(2.3rem,7vw,3.1rem);
+    line-height:1.05;
+    letter-spacing:-.015em;
+    margin-bottom:8px;
+  }
+  .updated{
+    color:var(--ink-soft);
+    font-size:.85rem;
+    margin-bottom:38px;
+  }
+
+  .lede{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:1.18rem;
+    line-height:1.55;
+    color:var(--ink);
+    padding:20px 22px;
+    border-left:3px solid var(--accent);
+    background:rgba(62,92,84,.05);
+    border-radius:0 10px 10px 0;
+    margin-bottom:42px;
+  }
+
+  h2{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.32rem;
+    letter-spacing:-.01em;
+    margin:38px 0 12px;
+  }
+  p{margin-bottom:16px}
+  p + h2{margin-top:42px}
+
+  a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+  a:hover{text-decoration-thickness:2px}
+
+  ul{margin:0 0 16px;padding-left:1.25em}
+  li{margin-bottom:8px}
+
+  strong{font-weight:600}
+
+  .contact{
+    margin-top:46px;
+    padding:22px;
+    border:1px solid var(--rule);
+    border-radius:12px;
+    background:rgba(51,48,42,.025);
+  }
+  .contact h2{margin-top:0}
+
+  footer{
+    border-top:1px solid var(--rule);
+    margin-top:56px;
+    padding:22px 0 40px;
+  }
+  footer .wrap{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-size:.8rem;color:var(--ink-soft);
+  }
+  footer .name{font-family:var(--serif);font-weight:500}
+  footer a{color:var(--ink-soft)}
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  @media (max-width:420px){
+    footer .wrap{flex-direction:column;gap:6px;text-align:center}
+  }
+</style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <a class="home" href="/">Ordo<small>Puzzles</small></a>
+      <a class="back" href="/">&larr; Home</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: June 26, 2026</p>
+
+    <p class="lede">
+      The short version: Ordo keeps your puzzles, streaks, and history on your
+      own device. It has no accounts, no ads, and no way to identify you. The
+      only thing it sends out is anonymous, aggregate usage data that helps
+      improve the game — and even that can never be traced back to you.
+    </p>
+
+    <p>
+      This policy explains what Ordo (“the app,” “we,” “us”) does and doesn’t do
+      with information when you use it. Ordo is made by an independent developer
+      and published under the name Ordo Puzzles. It applies to the Ordo iOS app
+      and to this website at ordopuzzles.com.
+    </p>
+
+    <h2>What stays on your device</h2>
+    <p>
+      Everything you do in Ordo — the puzzles you’ve solved, your current
+      streak, your archive, and your settings — is stored <strong>locally on
+      your device</strong>. Ordo has no servers of its own and no account
+      system, so this information is never uploaded, synced, or sent anywhere.
+      It stays on your phone, under your control.
+    </p>
+    <p>
+      If you delete the app, this data is deleted with it. There’s no copy held
+      somewhere else, because there’s nowhere else for it to be.
+    </p>
+
+    <h2>Anonymous usage analytics</h2>
+    <p>
+      To understand how people use Ordo — which features get used, where players
+      get stuck, whether an update helped — we use
+      <a href="https://telemetrydeck.com/privacy/" rel="noopener" target="_blank">TelemetryDeck</a>,
+      a privacy-focused analytics service. TelemetryDeck is built specifically
+      so that the data it gathers <strong>cannot be tied to you</strong>: any
+      identifier is anonymized (salted and hashed) before it’s sent, it uses no
+      cookies, and it never collects personally identifiable information.
+    </p>
+    <p>The information sent through TelemetryDeck is limited to things like:</p>
+    <ul>
+      <li>An anonymous identifier unique to your app installation — not linked to you, your name, or your Apple ID, and not shared across other apps.</li>
+      <li>Basic device details, such as device type, iOS version, and app version.</li>
+      <li>Simple in-app events, such as completing a daily puzzle, opening the archive, or tapping share — used only in aggregate to see how the app is doing.</li>
+    </ul>
+    <p>
+      We never see who you are, only anonymous totals and trends. For the full
+      detail of how TelemetryDeck handles data, see their
+      <a href="https://telemetrydeck.com/privacy/" rel="noopener" target="_blank">privacy policy</a>.
+    </p>
+
+    <h2>Purchases</h2>
+    <p>
+      Ordo offers a single one-time in-app purchase to unlock the archive.
+      Purchases are handled entirely by <strong>Apple</strong> through the App
+      Store — Ordo never sees or stores your payment details. The app only
+      learns whether the unlock has been purchased, so it can enable the
+      features you paid for. Apple’s handling of purchase information is covered
+      by the
+      <a href="https://www.apple.com/legal/privacy/" rel="noopener" target="_blank">Apple Privacy Policy</a>.
+    </p>
+
+    <h2>Notifications</h2>
+    <p>
+      Ordo can send you an optional daily reminder. These notifications are
+      scheduled <strong>on your device</strong> by iOS — nothing about them
+      leaves your phone, and we don’t collect anything related to them. You can
+      turn reminders on or off at any time in the app’s settings, or in your
+      iOS Settings.
+    </p>
+
+    <h2>What Ordo doesn’t do</h2>
+    <ul>
+      <li>No accounts, logins, or passwords.</li>
+      <li>No collection of your name, email, contacts, location, or photos.</li>
+      <li>No advertising and no advertising or tracking SDKs.</li>
+      <li>No selling or sharing of personal data — there isn’t any to sell.</li>
+      <li>No tracking you across other apps or websites.</li>
+    </ul>
+
+    <h2>Children</h2>
+    <p>
+      Ordo is a calm color puzzle suitable for all ages and contains nothing
+      inappropriate for children. Because the app collects no personal
+      information from anyone, it collects none from children either, including
+      children under 13.
+    </p>
+
+    <h2>Your rights and choices</h2>
+    <p>
+      Depending on where you live (for example, in the EEA, the UK, or
+      California), you may have rights to access or delete personal data a
+      company holds about you. Ordo doesn’t hold personal data that identifies
+      you, so in practice there’s little to retrieve — but you’re always welcome
+      to reach out with questions. To stop all data collection entirely, you can
+      delete the app at any time.
+    </p>
+
+    <h2>About this website</h2>
+    <p>
+      This site (ordopuzzles.com) is a simple static page hosted on GitHub
+      Pages and uses Google Fonts to render its typeface. It sets no cookies and
+      collects no personal information from visitors. As with any website,
+      the hosting and font providers may process standard technical request
+      information (such as IP addresses) as described in their own policies.
+    </p>
+
+    <h2>Changes to this policy</h2>
+    <p>
+      If Ordo’s practices change, we’ll update this page and revise the “last
+      updated” date above. Meaningful changes will be reflected here before they
+      take effect.
+    </p>
+
+    <section class="contact">
+      <h2>Contact</h2>
+      <p style="margin-bottom:0">
+        Questions about privacy or this policy? Email
+        <a href="mailto:feedback@ordopuzzles.com">feedback@ordopuzzles.com</a>
+        and we’ll be glad to help.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span class="name">Ordo Puzzles</span>
+      <span>Made by <a href="https://johndav.com">johndav</a></span>
+    </div>
+  </footer>
+</body>
+</html>
