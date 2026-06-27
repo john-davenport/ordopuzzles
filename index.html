@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ordo Puzzles — a daily color puzzle</title>
+<meta name="description" content="Ordo is a calm daily color puzzle. A new grid every morning, one quiet minute to set it right. Coming soon to iPhone.">
+
+<!-- Social share card. Add an og.png (1200×630) to the repo root before you
+     start sharing the link, then this fills out nicely on iMessage/X/etc. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ordo Puzzles">
+<meta property="og:description" content="A calm daily color puzzle. Order from disorder, one quiet minute every morning.">
+<meta property="og:url" content="https://ordopuzzles.com">
+<meta property="og:image" content="https://ordopuzzles.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Tiny ordered-tiles favicon, inline so there's no extra request. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F4EEE2'/%3E%3Crect x='6' y='6' width='9' height='9' rx='2' fill='%23BC6B4F'/%3E%3Crect x='17' y='6' width='9' height='9' rx='2' fill='%23C9A646'/%3E%3Crect x='6' y='17' width='9' height='9' rx='2' fill='%237E8C6A'/%3E%3Crect x='17' y='17' width='9' height='9' rx='2' fill='%235F727B'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#F4EEE2;
+    --paper-edge:#EDE5D5;
+    --ink:#33302A;
+    --ink-soft:#6E665A;
+    --accent:#3E5C54;
+    --rule:rgba(51,48,42,.14);
+
+    /* gouache palette, warm → cool, one tone per row */
+    --clay:#BC6B4F;
+    --ochre:#C9A646;
+    --sage:#7E8C6A;
+    --slate:#5F727B;
+    --plum:#855C72;
+
+    --serif:"Fraunces", Georgia, "Times New Roman", serif;
+    --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+
+  html,body{height:100%}
+  body{
+    background:
+      radial-gradient(120% 90% at 50% 12%, #F7F2E8 0%, var(--paper) 46%, var(--paper-edge) 100%);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    display:flex;
+    flex-direction:column;
+    min-height:100%;
+  }
+
+  main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:48px 24px 32px;
+    gap:0;
+  }
+
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:.7rem;
+    font-weight:600;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:30px;
+  }
+
+  /* ---- signature: the board that solves itself ---- */
+  .board{
+    position:relative;
+    width:min(282px, 72vw);
+    aspect-ratio:1/1;
+    margin-bottom:34px;
+    cursor:pointer;
+    touch-action:manipulation;
+  }
+  .tile{
+    position:absolute;
+    top:0;left:0;
+    width:20%;height:20%;
+    padding:3.2%;
+    transform:translate(calc(var(--c) * 100%), calc(var(--r) * 100%));
+    opacity:0;
+    transition:
+      transform 720ms cubic-bezier(.22,1,.36,1),
+      opacity 420ms ease;
+  }
+  .tile > i{
+    display:block;
+    width:100%;height:100%;
+    border-radius:9px;
+    background:var(--fill);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.18),
+      0 1px 2px rgba(51,48,42,.10);
+  }
+  .board.ready .tile{opacity:1}
+
+  /* ---- wordmark + copy ---- */
+  .wordmark{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(4.2rem, 17vw, 8.5rem);
+    line-height:.9;
+    letter-spacing:-.02em;
+    color:var(--ink);
+  }
+  .mark-sub{
+    font-family:var(--sans);
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-top:14px;
+    padding-left:.42em; /* optical: balance the tracked caps */
+  }
+
+  .tagline{
+    font-family:var(--serif);
+    font-weight:400;
+    font-style:italic;
+    font-size:clamp(1.3rem, 4.6vw, 1.95rem);
+    color:var(--ink);
+    margin-top:38px;
+  }
+  .sub{
+    font-size:clamp(.95rem, 2.6vw, 1.05rem);
+    line-height:1.6;
+    color:var(--ink-soft);
+    max-width:34ch;
+    margin:14px auto 0;
+  }
+
+  .status{
+    margin-top:30px;
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:inline-flex;
+    align-items:center;
+    gap:.6em;
+  }
+  .status::before{
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:var(--accent);
+    opacity:.55;
+  }
+
+  footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    padding:20px 26px;
+    border-top:1px solid var(--rule);
+    font-size:.8rem;
+    color:var(--ink-soft);
+  }
+  footer .name{
+    font-family:var(--serif);
+    font-weight:500;
+    letter-spacing:.02em;
+  }
+  footer a{
+    color:var(--ink-soft);
+    text-decoration:none;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:1px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  footer a:hover,
+  footer a:focus-visible{
+    color:var(--accent);
+    border-color:var(--accent);
+  }
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  @media (max-width:420px){
+    main{padding-top:36px}
+    .eyebrow{margin-bottom:24px}
+    footer{flex-direction:column;gap:8px;text-align:center}
+  }
+
+  /* Honour reduced-motion: skip the slide, show the solved grid. */
+  @media (prefers-reduced-motion: reduce){
+    .tile{transition:opacity 300ms ease}
+  }
+</style>
+</head>
+
+<body>
+  <main>
+    <p class="eyebrow">A daily color puzzle</p>
+
+    <div class="board" id="board" aria-hidden="true" title="Tap to shuffle"></div>
+
+    <h1 class="wordmark">Ordo</h1>
+    <p class="mark-sub">Puzzles</p>
+
+    <p class="tagline">Order from disorder.</p>
+    <p class="sub">A calm color puzzle, new every morning — one quiet minute to set the grid right.</p>
+
+    <p class="status">Coming soon to iPhone</p>
+  </main>
+
+  <footer>
+    <span class="name">Ordo Puzzles</span>
+    <span>Made by <a href="https://johndav.com">johndav</a></span>
+  </footer>
+
+<script>
+(function(){
+  const COLS = 5, ROWS = 5;
+  const fills = ['var(--clay)','var(--ochre)','var(--sage)','var(--slate)','var(--plum)'];
+  const board = document.getElementById('board');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 25 tiles; tile k belongs in ordered cell k, colored by its row band.
+  const tiles = [];
+  for (let k = 0; k < COLS * ROWS; k++){
+    const el = document.createElement('div');
+    el.className = 'tile';
+    const inner = document.createElement('i');
+    inner.style.setProperty('--fill', fills[Math.floor(k / COLS)]);
+    el.appendChild(inner);
+    board.appendChild(el);
+    tiles.push(el);
+  }
+
+  function place(el, cell, delay){
+    el.style.transitionDelay = delay + 'ms';
+    el.style.setProperty('--c', cell % COLS);
+    el.style.setProperty('--r', Math.floor(cell / COLS));
+  }
+
+  function shuffled(n){
+    const a = Array.from({length:n}, (_, i) => i);
+    for (let i = a.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function solve(){
+    if (reduce){
+      tiles.forEach((el, k) => { place(el, k, 0); });
+      board.classList.add('ready');
+      return;
+    }
+    // Start scrambled (no transition yet), then slide each tile home,
+    // cascading top band to bottom so it reads as "settling into order".
+    const scramble = shuffled(tiles.length);
+    tiles.forEach((el, k) => {
+      el.style.transition = 'none';
+      place(el, scramble[k], 0);
+    });
+    // next frame: re-enable transitions and move to the solved position
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      board.classList.add('ready');
+      tiles.forEach((el, k) => {
+        el.style.transition = '';
+        place(el, k, 90 * Math.floor(k / COLS) + Math.random() * 60);
+      });
+    }));
+  }
+
+  solve();
+  // Quiet easter egg: tap the board to scramble and re-solve.
+  board.addEventListener('click', () => { if (!reduce) solve(); });
+})();
+</script>
+</body>
+</html>
