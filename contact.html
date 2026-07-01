@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Ordo Puzzles</title>
+<meta name="description" content="Get in touch about Ordo — feedback, bug reports, archive purchases, or press. Made by an independent developer.">
+<meta name="robots" content="index">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F4EEE2'/%3E%3Crect x='6' y='6' width='9' height='9' rx='2' fill='%23BC6B4F'/%3E%3Crect x='17' y='6' width='9' height='9' rx='2' fill='%23C9A646'/%3E%3Crect x='6' y='17' width='9' height='9' rx='2' fill='%237E8C6A'/%3E%3Crect x='17' y='17' width='9' height='9' rx='2' fill='%235F727B'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#F4EEE2;
+    --paper-edge:#EDE5D5;
+    --ink:#33302A;
+    --ink-soft:#6E665A;
+    --accent:#3E5C54;
+    --rule:rgba(51,48,42,.14);
+    --serif:"Fraunces", Georgia, "Times New Roman", serif;
+    --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    line-height:1.65;
+  }
+
+  .wrap{max-width:660px;margin:0 auto;padding:0 24px}
+
+  header{
+    border-bottom:1px solid var(--rule);
+    padding:22px 0;
+    margin-bottom:46px;
+  }
+  header .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+  .home{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:1.5rem;
+    letter-spacing:-.01em;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .home small{
+    font-family:var(--sans);
+    font-size:.62rem;
+    font-weight:600;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-left:.7em;
+  }
+  .home:hover{color:var(--accent)}
+  .back{
+    font-size:.82rem;
+    color:var(--ink-soft);
+    text-decoration:none;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:1px;
+  }
+  .back:hover,.back:focus-visible{color:var(--accent);border-color:var(--accent)}
+
+  h1{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:clamp(2.3rem,7vw,3.1rem);
+    line-height:1.05;
+    letter-spacing:-.015em;
+    margin-bottom:10px;
+  }
+  .tagline{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:400;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    margin-bottom:38px;
+  }
+
+  .lede{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:1.18rem;
+    line-height:1.55;
+    color:var(--ink);
+    padding:20px 22px;
+    border-left:3px solid var(--accent);
+    background:rgba(62,92,84,.05);
+    border-radius:0 10px 10px 0;
+    margin-bottom:44px;
+  }
+
+  h2{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.32rem;
+    letter-spacing:-.01em;
+    margin:38px 0 10px;
+  }
+  p{margin-bottom:16px}
+
+  a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+  a:hover{text-decoration-thickness:2px}
+
+  strong{font-weight:600}
+
+  /* the primary email card */
+  .email-card{
+    margin:0 0 40px;
+    padding:26px 24px;
+    border:1px solid var(--rule);
+    border-radius:14px;
+    background:rgba(51,48,42,.025);
+    text-align:center;
+  }
+  .email-card .eyebrow{
+    font-size:.62rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:12px;
+  }
+  .email-card a.addr{
+    font-family:var(--serif);
+    font-size:clamp(1.3rem,5vw,1.7rem);
+    font-weight:500;
+    text-decoration:none;
+    letter-spacing:-.01em;
+    border-bottom:2px solid var(--rule);
+    padding-bottom:2px;
+  }
+  .email-card a.addr:hover{border-color:var(--accent)}
+  .email-card .note{
+    font-size:.85rem;color:var(--ink-soft);margin:14px 0 0;
+  }
+
+  /* reasons list */
+  .reasons{
+    list-style:none;padding:0;margin:0 0 8px;
+    border-top:1px solid var(--rule);
+  }
+  .reasons li{
+    display:flex;gap:16px;align-items:baseline;
+    padding:16px 2px;
+    border-bottom:1px solid var(--rule);
+  }
+  .reasons .what{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.02rem;
+    flex:0 0 8.4em;
+    letter-spacing:-.01em;
+  }
+  .reasons .desc{color:var(--ink-soft);font-size:.95rem;line-height:1.5}
+  .reasons .desc a{color:var(--accent)}
+
+  .elsewhere{
+    margin-top:44px;
+    padding:22px 24px;
+    border:1px solid var(--rule);
+    border-radius:12px;
+    background:rgba(62,92,84,.04);
+  }
+  .elsewhere h2{margin-top:0}
+  .elsewhere p{margin-bottom:0}
+
+  footer{
+    border-top:1px solid var(--rule);
+    margin-top:56px;
+    padding:22px 0 40px;
+  }
+  footer .wrap{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-size:.8rem;color:var(--ink-soft);
+  }
+  footer .links{display:flex;gap:18px}
+  footer .name{font-family:var(--serif);font-weight:500}
+  footer a{color:var(--ink-soft)}
+  footer a:hover{color:var(--accent)}
+
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  @media (max-width:480px){
+    .reasons li{flex-direction:column;gap:3px}
+    .reasons .what{flex-basis:auto}
+    footer .wrap{flex-direction:column;gap:10px;text-align:center}
+  }
+</style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap">
+      <a class="home" href="/">Ordo<small>Puzzles</small></a>
+      <a class="back" href="/">&larr; Home</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Get in touch</h1>
+    <p class="tagline">A calm daily color puzzle, made by one person.</p>
+
+    <p class="lede">
+      Ordo is built and looked after by an independent developer — so when you
+      write in, you’re reaching an actual human, not a support queue. Feedback,
+      bugs, kind words, and hard questions are all welcome.
+    </p>
+
+    <div class="email-card">
+      <div class="eyebrow">The best way to reach me</div>
+      <a class="addr" href="mailto:feedback@ordopuzzles.com">feedback@ordopuzzles.com</a>
+      <p class="note">I read every message. Since it’s just me, replies can take a few days.</p>
+    </div>
+
+    <h2>What to write about</h2>
+    <ul class="reasons">
+      <li>
+        <span class="what">Feedback&nbsp;&amp;&nbsp;ideas</span>
+        <span class="desc">Thoughts on the puzzles, a feature you’d love, or just what’s working. It genuinely shapes where Ordo goes next.</span>
+      </li>
+      <li>
+        <span class="what">Bug reports</span>
+        <span class="desc">Something not working right? Let me know your device, your iOS version, and what happened — the more detail, the faster the fix.</span>
+      </li>
+      <li>
+        <span class="what">Archive&nbsp;unlock</span>
+        <span class="desc">Trouble with the one-time archive purchase or restoring it on a new device? I’ll help sort it out.</span>
+      </li>
+      <li>
+        <span class="what">Press&nbsp;&amp;&nbsp;features</span>
+        <span class="desc">Writing about Ordo or looking for assets? Say hello and I’ll get you what you need.</span>
+      </li>
+    </ul>
+
+    <div class="elsewhere">
+      <h2>Elsewhere</h2>
+      <p>
+        I also write and talk about building small things — apps, hardware,
+        odd experiments — as the <strong>Tinkerer’s Notebook</strong>. If that’s
+        your kind of thing, you can find it over at
+        <a href="https://johndav.com" rel="noopener">johndav.com</a>.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span class="name">Ordo Puzzles</span>
+      <span class="links">
+        <a href="/">Home</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="https://johndav.com">johndav</a>
+      </span>
+    </div>
+  </footer>
+</body>
+</html>
