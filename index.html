@@ -10,17 +10,17 @@
      start sharing the link, then this fills out nicely on iMessage/X/etc. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Ordo Puzzles">
-<meta property="og:description" content="A calm daily color puzzle. Order from disorder, one quiet minute every morning.">
+<meta property="og:description" content="A calm color puzzle. Order from disorder, one quiet minute every morning.">
 <meta property="og:url" content="https://ordopuzzles.com">
 <meta property="og:image" content="https://ordopuzzles.com/og.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- Tiny ordered-tiles favicon, inline so there's no extra request. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F4EEE2'/%3E%3Crect x='6' y='6' width='9' height='9' rx='2' fill='%23BC6B4F'/%3E%3Crect x='17' y='6' width='9' height='9' rx='2' fill='%23C9A646'/%3E%3Crect x='6' y='17' width='9' height='9' rx='2' fill='%237E8C6A'/%3E%3Crect x='17' y='17' width='9' height='9' rx='2' fill='%235F727B'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23F4EEE2'/%3E%3Crect x='6' y='6' width='9' height='9' rx='2' fill='%23C06A52'/%3E%3Crect x='17' y='6' width='9' height='9' rx='2' fill='%23D2A24E'/%3E%3Crect x='6' y='17' width='9' height='9' rx='2' fill='%237E9A6E'/%3E%3Crect x='17' y='17' width='9' height='9' rx='2' fill='%235E8A8E'/%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,800&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -31,12 +31,14 @@
     --accent:#3E5C54;
     --rule:rgba(51,48,42,.14);
 
-    /* gouache palette, warm → cool, one tone per row */
-    --clay:#BC6B4F;
-    --ochre:#C9A646;
-    --sage:#7E8C6A;
-    --slate:#5F727B;
-    --plum:#855C72;
+    /* Real ChromaTheme.swift palette — the same five/six tiles the app uses,
+       not a lookalike. "Slate" is deliberately not a tile name here — that
+       word already means the app's dark appearance mode. */
+    --clay:#C06A52;
+    --ochre:#D2A24E;
+    --teal:#5E8A8E;
+    --plum:#876E96;
+    --sage:#7E9A6E;
 
     --serif:"Fraunces", Georgia, "Times New Roman", serif;
     --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -83,7 +85,6 @@
     position:relative;
     width:min(282px, 72vw);
     aspect-ratio:1/1;
-    margin-bottom:34px;
     cursor:pointer;
     touch-action:manipulation;
   }
@@ -99,6 +100,7 @@
       opacity 420ms ease;
   }
   .tile > i{
+    position:relative;
     display:block;
     width:100%;height:100%;
     border-radius:9px;
@@ -107,7 +109,44 @@
       inset 0 1px 0 rgba(255,255,255,.18),
       0 1px 2px rgba(51,48,42,.10);
   }
+  /* The "placed" ink frame — same visual signature as CellView's .correct
+     overlay in the real app: a dark border with a bright inner ring, layered
+     ON TOP of the base tile rather than replacing its own fill/shadow. Starts
+     fully transparent so it can fade in per-tile as each one lands. */
+  .tile > i::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:9px;
+    border:3px solid transparent;
+    box-shadow:inset 0 0 0 1.2px transparent;
+    transition:border-color 380ms ease, box-shadow 380ms ease;
+  }
+  .tile.landed > i::after{
+    border-color:var(--ink);
+    box-shadow:inset 0 0 0 1.2px var(--paper);
+  }
   .board.ready .tile{opacity:1}
+
+  /* Echoes the app's own SOLVED stamp — same tracked serif, same ink-bordered
+     pill — reveals once every tile has finished landing. */
+  .board-stamp{
+    font-family:var(--serif);
+    font-weight:800;
+    letter-spacing:8px;
+    font-size:.78rem;
+    color:var(--accent);
+    border:2px solid var(--accent);
+    border-radius:5px;
+    padding:6px 16px;
+    display:inline-block;
+    margin-top:18px;
+    margin-bottom:16px;
+    opacity:0;
+    transform:scale(0.9);
+    transition:opacity 420ms ease, transform 420ms ease;
+  }
+  .board-stamp.show{opacity:1; transform:scale(1);}
 
   /* ---- wordmark + copy ---- */
   .wordmark{
@@ -146,7 +185,7 @@
   }
 
   .status{
-    margin-top:30px;
+    margin-top:22px;
     font-size:.72rem;
     font-weight:600;
     letter-spacing:.18em;
@@ -163,6 +202,26 @@
     opacity:.55;
   }
 
+  .play-cta{
+    display:inline-block;
+    margin-top:34px;
+    font-family:var(--sans);
+    font-size:.85rem;
+    font-weight:600;
+    letter-spacing:.06em;
+    color:var(--paper);
+    background:var(--accent);
+    padding:14px 34px;
+    border-radius:999px;
+    text-decoration:none;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .play-cta:hover,
+  .play-cta:focus-visible{
+    transform:translateY(-1px);
+    box-shadow:0 6px 16px rgba(62,92,84,.28);
+  }
+
   footer{
     display:flex;
     justify-content:space-between;
@@ -177,6 +236,10 @@
     font-family:var(--serif);
     font-weight:500;
     letter-spacing:.02em;
+  }
+  .footer-nav{
+    display:flex;
+    gap:16px;
   }
   footer a{
     color:var(--ink-soft);
@@ -199,9 +262,14 @@
     footer{flex-direction:column;gap:8px;text-align:center}
   }
 
-  /* Honour reduced-motion: skip the slide, show the solved grid. */
+  /* Honour reduced-motion: no slide, no color-fade — everything just
+     appears in its finished state at once. Matches the app's own stricter
+     precedent (GameSession disables even small fades under Reduce Motion,
+     not just spatial movement). */
   @media (prefers-reduced-motion: reduce){
     .tile{transition:opacity 300ms ease}
+    .tile > i::after{transition:none}
+    .board-stamp{transition:none}
   }
 </style>
 </head>
@@ -211,35 +279,44 @@
     <p class="eyebrow">A daily color puzzle</p>
 
     <div class="board" id="board" aria-hidden="true" title="Tap to shuffle"></div>
+    <p class="board-stamp" id="boardStamp" aria-hidden="true">SOLVED</p>
 
     <h1 class="wordmark">Ordo</h1>
     <p class="mark-sub">Puzzles</p>
 
-    <p class="tagline">Order from disorder.</p>
-    <p class="sub">A calm color puzzle, new every morning — one quiet minute to set the grid right.</p>
+    <p class="tagline">One grid. One solution.</p>
+    <p class="sub">Swap tiles, read the clues, and solve the puzzle. Every day.</p>
+
+    <a class="play-cta" href="https://play.ordopuzzles.com">Play today&rsquo;s puzzle</a>
 
     <p class="status">Coming soon to iPhone</p>
   </main>
 
   <footer>
     <span class="name">Ordo Puzzles</span>
+    <nav class="footer-nav" aria-label="More">
+      <a href="https://apps.apple.com/app/id6784089149">App Store</a>
+      <a href="https://www.ordopuzzles.com/privacy/">Privacy</a>
+      <a href="https://ordopuzzles.com/contact">Feedback</a>
+    </nav>
     <span>Made by <a href="https://johndav.com">johndav</a></span>
   </footer>
 
 <script>
 (function(){
   const COLS = 5, ROWS = 5;
-  const fills = ['var(--clay)','var(--ochre)','var(--sage)','var(--slate)','var(--plum)'];
-  const board = document.getElementById('board');
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fills = ['var(--clay)','var(--ochre)','var(--teal)','var(--plum)','var(--sage)'];
 
-  // 25 tiles; tile k belongs in ordered cell k, colored by its row band.
+  const board = document.getElementById('board');
+  const stamp = document.getElementById('boardStamp');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SLIDE_MS = 720; // must match .tile's transform transition duration
+
   const tiles = [];
   for (let k = 0; k < COLS * ROWS; k++){
     const el = document.createElement('div');
     el.className = 'tile';
     const inner = document.createElement('i');
-    inner.style.setProperty('--fill', fills[Math.floor(k / COLS)]);
     el.appendChild(inner);
     board.appendChild(el);
     tiles.push(el);
@@ -261,25 +338,48 @@
   }
 
   function solve(){
+    // Fresh random colors every time — same as ChromaPuzzle.generate: each
+    // cell gets an independent random color, no pattern enforced (and none
+    // needed; a true random assignment across 25 cells essentially never
+    // lands on a uniform row or column by chance).
+    tiles.forEach(el => {
+      const colorIdx = Math.floor(Math.random() * fills.length);
+      el.querySelector('i').style.setProperty('--fill', fills[colorIdx]);
+    });
+
+    stamp.classList.remove('show');
+    tiles.forEach(el => el.classList.remove('landed'));
+
     if (reduce){
-      tiles.forEach((el, k) => { place(el, k, 0); });
+      tiles.forEach((el, k) => { place(el, k, 0); el.classList.add('landed'); });
       board.classList.add('ready');
+      stamp.classList.add('show');
       return;
     }
+
     // Start scrambled (no transition yet), then slide each tile home,
-    // cascading top band to bottom so it reads as "settling into order".
+    // cascading top band to bottom so it reads as "settling into order" —
+    // landing on a genuinely scrambled-looking target, not sorted rows.
     const scramble = shuffled(tiles.length);
     tiles.forEach((el, k) => {
       el.style.transition = 'none';
       place(el, scramble[k], 0);
     });
-    // next frame: re-enable transitions and move to the solved position
+
     requestAnimationFrame(() => requestAnimationFrame(() => {
       board.classList.add('ready');
+      let maxFinish = 0;
       tiles.forEach((el, k) => {
         el.style.transition = '';
-        place(el, k, 90 * Math.floor(k / COLS) + Math.random() * 60);
+        const delay = 90 * Math.floor(k / COLS) + Math.random() * 60;
+        place(el, k, delay);
+        const finish = delay + SLIDE_MS;
+        maxFinish = Math.max(maxFinish, finish);
+        // Ink frame fades in right as this tile finishes its own slide —
+        // staggered arrival, same as the game's real per-cell "placed" beat.
+        setTimeout(() => el.classList.add('landed'), finish);
       });
+      setTimeout(() => stamp.classList.add('show'), maxFinish + 100);
     }));
   }
 
