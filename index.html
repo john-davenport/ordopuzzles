@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ordo Puzzles — a daily color puzzle</title>
-<meta name="description" content="Ordo is a calm daily color puzzle. A new grid every morning, one quiet minute to set it right. Coming soon to iPhone.">
+<meta name="description" content="Ordo is a calm daily color puzzle. A new grid every morning, one quiet minute to set it right. Available now on iPhone.">
 
 <!-- Social share card. Add an og.png (1200×630) to the repo root before you
      start sharing the link, then this fills out nicely on iMessage/X/etc. -->
@@ -184,6 +184,9 @@
     margin:14px auto 0;
   }
 
+  /* Now a real link (App Store is live), not just a status note — quiet
+     opacity-based hover rather than the play-cta's bolder lift+shadow, so it
+     still reads as secondary to that primary button above it. */
   .status{
     margin-top:22px;
     font-size:.72rem;
@@ -191,9 +194,15 @@
     letter-spacing:.18em;
     text-transform:uppercase;
     color:var(--accent);
+    text-decoration:none;
     display:inline-flex;
     align-items:center;
     gap:.6em;
+    transition:opacity .2s ease;
+  }
+  .status:hover,
+  .status:focus-visible{
+    opacity:.75;
   }
   .status::before{
     content:"";
@@ -289,7 +298,7 @@
 
     <a class="play-cta" href="https://play.ordopuzzles.com">Play today&rsquo;s puzzle</a>
 
-    <p class="status">Coming soon to iPhone</p>
+    <a class="status" href="https://apps.apple.com/app/id6784089149">Available on iPhone</a>
   </main>
 
   <footer>
